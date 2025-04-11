@@ -243,10 +243,11 @@ int main() {
     cout << list1.back() << endl;
     cout << list1.pop_front() << endl;
     cout << list1.pop_back() << endl;
+    cout << list1[2] << endl;
     cout << list1.size() << endl;
 
 
-    // test push
+
     cout << "\n";
     cout << "TEST PUSH:" << endl;
     forwardList<string> list2;
@@ -258,7 +259,7 @@ int main() {
     cout << list2.back() << endl;
 
 
-    // test []
+
     cout << "\n";
     cout << "TEST []:" << endl;
     cout << "Imprimiendo " <<list2.size() << " elementos:"<< endl;
@@ -267,7 +268,7 @@ int main() {
     }
 
 
-    // test pop
+
     cout << "\n";
     cout << "TEST POP:" << endl;
     cout << list2.pop_front() << endl;
@@ -275,29 +276,27 @@ int main() {
     cout << list2.front() << endl;
 
 
-    // test clear
     cout << "\n";
     cout << "TEST CLEAR:" << endl;
-    cout << "Lista incial: "<<list2<< endl;
+    cout << "Lista inicial: "<<list2<< endl;
     list2.clear();
     cout << "Lista final: "<<list2.size() << endl;
 
 
-    // test reverse, insert, remove, sort
     cout << "\n";
-    cout << "TEST RESERVE, INSERT, REMOVE, SHORT:" << endl;
+    cout << "TEST RESERVE, INSERT, REMOVE, SORT:" << endl;
     forwardList<int> list3;
+    list3.push_front(3);
     list3.push_front(5);
     list3.push_front(2);
-    list3.push_front(4);
-    list3.push_front(8);
-    list3.insert(99,7);
-    list3.remove(7);
-    list3.push_front(1);
-    list3.insert(5,3);
     list3.push_front(9);
-    list3.push_front(6);
-    list3.insert(6, 7);
+    list3.insert(88,5);
+    list3.remove(9);
+    list3.push_front(2);
+    list3.insert(5,2);
+    list3.push_front(10);
+    list3.push_front(5);
+    list3.insert(4, 5);
 
     cout << "\n";
     cout << "Original: ";
@@ -312,5 +311,4 @@ int main() {
     list3.reverse();
     cout << "Reversed: ";
     cout << list3 << endl;
-
 }
