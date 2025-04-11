@@ -1,3 +1,3 @@
-C:/Users/Cesar/CLionProjects/ForwardList/cmake-build-debug/CMakeFiles/ForwardList.dir
-C:/Users/Cesar/CLionProjects/ForwardList/cmake-build-debug/CMakeFiles/edit_cache.dir
-C:/Users/Cesar/CLionProjects/ForwardList/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+C:/Users/Cesar/Desktop/AED-HW/HW1/cmake-build-debug/CMakeFiles/ForwardList.dir
+C:/Users/Cesar/Desktop/AED-HW/HW1/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/Cesar/Desktop/AED-HW/HW1/cmake-build-debug/CMakeFiles/rebuild_cache.dir
