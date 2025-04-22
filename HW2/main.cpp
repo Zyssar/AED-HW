@@ -60,13 +60,10 @@ public:
             newN->val = elem;
             if(temp->prev){
                 newN->prev = temp->prev;
-                temp->next = newN;
+                temp->prev->next = newN;
             }
-            if(temp->next){
-                newN->next = temp;
-                temp->prev = newN;
-            }
-
+            newN->next = temp;
+            temp->prev = newN;
         }
     }
 
@@ -90,7 +87,7 @@ public:
     T operator[](int index){   
         if((this->size() - 1) < index || index < 0){ //falta size para verificar
             throw std::out_of_range();
-        } //no remueve si es que la posición esta fuera de rango
+        } //no retorna si es que la posición esta fuera de rango
         Node* temp = head;
         int i = 0;
         while(i != index){
