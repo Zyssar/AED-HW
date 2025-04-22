@@ -12,8 +12,8 @@ struct Node{
 template <typename T>
 class DoubleLinkedList{
 private:
-    Node<T> head;
-    Node<T> tail;
+    Node<T>* head;
+    int count; //cuenta de nodos actuales
 public:
     DoubleLinkedList() : head(nullptr), tail(nullptr) {} //constructor base
 
@@ -43,12 +43,11 @@ public:
 
     void insert(T elem, int index){
         if(head==nullptr){
-            Node* temp = new Node*;
-            temp->val = elem;
-            head->temp;
+            Node* temp = new Node<T>(elem);
+            head = temp;
         }else{
-            if((this->size() - 1) < index || index < 0){ //falta size para verificar
-                throw std::out_of_range();
+            if((count < index || index < 0){
+                throw std::out_of_range("Fuera de rango");
             } //no inserta si es que la posición esta fuera de rango
             Node* temp = head;
             int i = 0;
@@ -64,12 +63,13 @@ public:
             }
             newN->next = temp;
             temp->prev = newN;
+            count++;
         }
     }
 
     void remove(int index){
-        if((this->size() - 1) < index || index < 0){ //falta size para verificar
-            throw std::out_of_range();
+        if(count < index || index < 0){
+            throw std::out_of_range("Fuera de rango");
         } //no remueve si es que la posición esta fuera de rango
         Node* temp = head;
         int i = 0;
@@ -82,11 +82,12 @@ public:
             temp->next->prev = temp->prev;
         }
         delete temp;
+        count--;
     }
 
     T operator[](int index){   
-        if((this->size() - 1) < index || index < 0){ //falta size para verificar
-            throw std::out_of_range();
+        if(count < index || index < 0){ 
+            throw std::out_of_range("Fuera de rango");
         } //no retorna si es que la posición esta fuera de rango
         Node* temp = head;
         int i = 0;
