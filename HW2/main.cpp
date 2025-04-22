@@ -43,7 +43,9 @@ public:
 
     void insert(T elem, int index){
         if(head==nullptr){
-            head->val = elem
+            Node* temp = new Node*;
+            temp->val = elem;
+            head->temp;
         }else{
             if((this->size() - 1) < index || index < 0){ //falta size para verificar
                 throw std::out_of_range();
@@ -71,7 +73,7 @@ public:
     void remove(int index){
         if((this->size() - 1) < index || index < 0){ //falta size para verificar
             throw std::out_of_range();
-        } //no inserta si es que la posición esta fuera de rango
+        } //no remueve si es que la posición esta fuera de rango
         Node* temp = head;
         int i = 0;
         while(i != index){
@@ -88,7 +90,7 @@ public:
     T operator[](int index){   
         if((this->size() - 1) < index || index < 0){ //falta size para verificar
             throw std::out_of_range();
-        } //no inserta si es que la posición esta fuera de rango
+        } //no remueve si es que la posición esta fuera de rango
         Node* temp = head;
         int i = 0;
         while(i != index){
