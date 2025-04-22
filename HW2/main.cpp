@@ -41,16 +41,61 @@ public:
 
     }
 
-    void insert(T, int){
+    void insert(T elem, int index){
+        if(head==nullptr){
+            head->val = elem
+        }else{
+            if((this->size() - 1) < index || index < 0){ //falta size para verificar
+                throw std::out_of_range();
+            } //no inserta si es que la posición esta fuera de rango
+            Node* temp = head;
+            int i = 0;
+            while(i != index){
+                temp = temp->next;
+                i++;
+            }
+            Node* newN = new Node*;
+            newN->val = elem;
+            if(temp->prev){
+                newN->prev = temp->prev;
+                temp->next = newN;
+            }
+            if(temp->next){
+                newN->next = temp;
+                temp->prev = newN;
+            }
 
+        }
     }
 
-    void remove(int){
-
+    void remove(int index){
+        if((this->size() - 1) < index || index < 0){ //falta size para verificar
+            throw std::out_of_range();
+        } //no inserta si es que la posición esta fuera de rango
+        Node* temp = head;
+        int i = 0;
+        while(i != index){
+            temp = temp->next;
+            i++;
+        }
+        if(temp->prev && temp->next){
+            temp->prev->next = temp->next;
+            temp->next->prev = temp->prev;
+        }
+        delete temp;
     }
 
-    T operator[](int){
-
+    T operator[](int index){   
+        if((this->size() - 1) < index || index < 0){ //falta size para verificar
+            throw std::out_of_range();
+        } //no inserta si es que la posición esta fuera de rango
+        Node* temp = head;
+        int i = 0;
+        while(i != index){
+            temp = temp->next;
+            i++;
+        }
+        return temp->val;
     }
 
     bool empty(){
@@ -66,6 +111,18 @@ public:
     }
 
     void reverse(){
-        
+        Node* temp = head;
+        Node* newHead = nullptr;
+        while(temp!=nullptr){
+            Node* ptrSave = temp->next;
+            temp->next = temp->prev;
+            temp->prev = ptrSave; //intercambia punteros next y prev por cada iteracion
+            
+            newHead = temp;
+            temp = temp->prev;
+        }
+        head = newHead;
     }
 };
+
+
