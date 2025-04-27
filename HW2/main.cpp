@@ -82,15 +82,55 @@ public:
 
     }
 
-    void insert() {
+    void insert(T elem, int index){
+        if (index < 0 || index > size) {
+            throw out_of_range("Fuera de rango");
+        }
 
+        Node* current = sentinel->next;
+        for (int i = 0; i < index; ++i) {
+            current = current->next;
+        }
+
+        Node* newNode = new Node(elem);
+
+        newNode->prev = current->prev;
+        newNode->next = current;
+
+        current->prev->next = newNode;
+        current->prev = newNode;
+
+        size++;
     }
-    void remove() {
 
+    void remove(int index) {
+        if (index < 0 || index >= size) {
+            throw out_of_range("Fuera de rango");
+        }
+
+        Node* current = sentinel->next;
+        for (int i = 0; i < index; ++i) {
+            current = current->next;
+        }
+
+        current->prev->next = current->next;
+        current->next->prev = current->prev;
+
+        delete current;
+        --size;
     }
 
-    T operator[](int index) {
+    T operator[](int index) const {
+        if (index < 0 || index >= size) {
+            throw out_of_range("Fuera de rango");
+        }
 
+        Node* current = sentinel->next;
+        for (int i = 0; i < index; ++i) {
+            current = current->next;
+        }
+
+        return current->data;
     }
 
     int list_size() {
@@ -98,6 +138,15 @@ public:
     }
 
     void reverse() {
-
+        Node* current = sentinel;
+        while (true) {
+            Node* temp = current->next;
+            current->next = current->prev;
+            current->prev = temp;
+            current = temp;
+            if (current == sentinel) {
+                break;
+            }
+        }
     }
 };
