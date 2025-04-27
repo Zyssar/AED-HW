@@ -74,43 +74,41 @@ public:
         }
     }
 
-    T pop_front(){
-        if(size ==0){
-            throw out_of_range("La lista esta vacia");
+    T pop_front() {
+        if (size == 0) {
+            throw out_of_range("La lista está vacía");
         }
 
-        Node* toDelete = sentinel ->next;
+        Node* toDelete = sentinel->next;
 
-        // Actualizamos los enlaces de los punteros
-
-        sentinel ->next = toDelete->next;
+        // Actualizamos los punteros
+        sentinel->next = toDelete->next;
         toDelete->next->prev = sentinel;
 
         delete toDelete;
         size--;
 
-        return data
-
+        return toDelete->data;
     }
 
-    T pop_back(){
-        if(size ==0){
-            throw out_of_range("La lista esta vacia");
+
+    T pop_back() {
+        if (size == 0) {
+            throw out_of_range("La lista está vacía");
         }
 
-        Node* toDelete = sentinel ->next;
+        Node* toDelete = sentinel->prev;
 
-        // Actualizamos los enlaces de los punteros
-
-        sentinel -> prev = toDelete -> prev;
-        toDelete -> prev->next = sentinel;
+        // Actualizamos los punteros
+        sentinel->prev = toDelete->prev;
+        toDelete->prev->next = sentinel;
 
         delete toDelete;
         size--;
 
-        return data
-
+        return toDelete->data;
     }
+
 
     void insert(T elem, int index){
         if (index < 0 || index > size) {
@@ -122,7 +120,8 @@ public:
             current = current->next;
         }
 
-        Node* newNode = new Node(elem);
+        Node* newNode = new Node();
+        newNode->data = elem;
 
         newNode->prev = current->prev;
         newNode->next = current;
@@ -180,3 +179,68 @@ public:
         }
     }
 };
+
+int main() {
+    CircularDoublyLinkedList<int> list;
+
+    cout << "Probando push_front y push_back:\n";
+    list.push_front(10);
+    list.push_back(20);
+    list.push_front(5);
+    list.push_back(30);
+
+    cout << "Elementos actuales (acceso con operador []):\n";
+    for (int i = 0; i < list.list_size(); i++) {
+        cout << list[i] << " ";
+    }
+    cout << endl;
+
+    cout << "\nProbando front() y back():\n";
+    cout << "Front: " << list.front() << endl;
+    cout << "Back: " << list.back() << endl;
+
+    cout << "\nProbando insert en posicion 2 (valor 15):\n";
+    list.insert(15, 2);
+    for (int i = 0; i < list.list_size(); i++) {
+        cout << list[i] << " ";
+    }
+    cout << endl;
+
+    cout << "\nProbando remove en posicion 1:\n";
+    list.remove(1);
+    for (int i = 0; i < list.list_size(); i++) {
+        cout << list[i] << " ";
+    }
+    cout << endl;
+
+    cout << "\nProbando pop_front:\n";
+    list.pop_front();
+    for (int i = 0; i < list.list_size(); i++) {
+        cout << list[i] << " ";
+    }
+    cout << endl;
+
+    cout << "\nProbando pop_back:\n";
+    list.pop_back();
+    for (int i = 0; i < list.list_size(); i++) {
+        cout << list[i] << " ";
+    }
+    cout << endl;
+
+    cout << "\nProbando reverse:\n";
+    list.reverse();
+    for (int i = 0; i < list.list_size(); i++) {
+        cout << list[i] << " ";
+    }
+    cout << endl;
+
+    cout << "\nProbando size:\n";
+    cout<<list.list_size();
+    cout << endl;
+
+    cout << "\nProbando clear:\n";
+    list.clear();
+    cout << "Lista vacia: " << (list.empty() ? "Si" : "No") << endl;
+
+
+}
