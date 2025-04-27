@@ -76,7 +76,7 @@ public:
 
     T pop_front(){
         if(size ==0){
-            throw out_of_range("La lista esta vacia")
+            throw out_of_range("La lista esta vacia");
         }
 
         Node* toDelete = sentinel ->next;
@@ -84,7 +84,7 @@ public:
         // Actualizamos los enlaces de los punteros
 
         sentinel ->next = toDelete->next;
-        toDelete->next->prev = setinel;
+        toDelete->next->prev = sentinel;
 
         delete toDelete;
         size--;
@@ -93,7 +93,7 @@ public:
 
     T pop_back(){
         if(size ==0){
-            throw out_of_range("La lista esta vacia")
+            throw out_of_range("La lista esta vacia");
         }
 
         Node* toDelete = sentinel ->next;
