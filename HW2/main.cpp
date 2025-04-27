@@ -89,6 +89,8 @@ public:
         delete toDelete;
         size--;
 
+        return data
+
     }
 
     T pop_back(){
@@ -100,11 +102,13 @@ public:
 
         // Actualizamos los enlaces de los punteros
 
-        sentinel ->  prev = toDelete->next;
+        sentinel -> prev = toDelete -> prev;
         toDelete -> prev->next = sentinel;
 
         delete toDelete;
         size--;
+
+        return data
 
     }
 
