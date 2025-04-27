@@ -8,4 +8,4 @@ Luciana Yangali Cáceres
 
 **Tarea:**
 
-Implementación de una Lista simplemente enlazada
+Implementación de una Lista Circular Doblemente Enlazada
