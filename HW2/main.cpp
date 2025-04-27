@@ -122,7 +122,8 @@ public:
             current = current->next;
         }
 
-        Node* newNode = new Node(elem);
+        Node* newNode = new Node();
+        newNode->data = elem;
 
         newNode->prev = current->prev;
         newNode->next = current;
