@@ -1,36 +1,77 @@
 #include <iostream>
-
+using namespace std;
 template <typename T>
-struct Node{
-    T val;
-    Node* prev;
-    Node* next;
-    Node() : val(), prev(nullptr), next(nullptr) {}
-    Node(const T& value): val(value), prev(nullptr), next(nullptr){}
-};
 
-template <typename T>
-class DoubleLinkedList{
+class CircularDoublyLinkedList {
 private:
-    Node<T>* head;
-    int count; //cuenta de nodos actuales
+    struct Node {
+        T data;
+        Node* prev;
+        Node* next;
+    };
+
+    Node* sentinel;
+    int size;
+
 public:
-    DoubleLinkedList() : head(nullptr), tail(nullptr) {} //constructor base
-
-    T front(){
-
+    CircularDoublyLinkedList() {
+        sentinel = new Node();
+        sentinel->next = sentinel;
+        sentinel->prev = sentinel;
+        size = 0;
     }
 
-    T back(){
-
+    bool empty() const {
+        return size == 0;
     }
 
-    void push_front(T){
-
+    T front() const {
+        if (empty()) {
+            throw runtime_error("La lista está vacía");
+        }
+        return sentinel->next->data;
     }
 
-    void push_back(T){
 
+    T back() const {
+        if (empty()) {
+            throw runtime_error("La lista está vacía");
+        }
+        return sentinel->prev->data;
+    }
+
+    void push_front(T data) {
+        Node* newNode = new Node();
+        newNode->data = data;
+        Node* first = sentinel->next;
+        newNode->prev = sentinel;
+        newNode->next = first;
+        first->prev = newNode;
+        sentinel->next = newNode;
+        size++;
+    }
+    void push_back(T data) {
+        Node* newNode = new Node();
+        newNode->data = data;
+        Node* last = sentinel->prev;
+        newNode->prev = last;
+        newNode->next = sentinel;
+        last->next = newNode;
+        sentinel->prev = newNode;
+        size++;
+    }
+
+    void clear() {
+        Node* curr = sentinel->next;
+        sentinel->next = sentinel;
+        sentinel->prev = sentinel;
+        size = 0;
+
+        while(curr != sentinel) {
+            Node* next = curr->next;
+            delete curr;
+            curr = next;
+        }
     }
 
     T pop_front(){
@@ -41,88 +82,22 @@ public:
 
     }
 
-    void insert(T elem, int index){
-        if(head==nullptr){
-            Node* temp = new Node<T>(elem);
-            head = temp;
-        }else{
-            if((count < index || index < 0){
-                throw std::out_of_range("Fuera de rango");
-            } //no inserta si es que la posición esta fuera de rango
-            Node* temp = head;
-            int i = 0;
-            while(i != index){
-                temp = temp->next;
-                i++;
-            }
-            Node* newN = new Node*;
-            newN->val = elem;
-            if(temp->prev){
-                newN->prev = temp->prev;
-                temp->prev->next = newN;
-            }
-            newN->next = temp;
-            temp->prev = newN;
-            count++;
-        }
-    }
+    void insert() {
 
-    void remove(int index){
-        if(count < index || index < 0){
-            throw std::out_of_range("Fuera de rango");
-        } //no remueve si es que la posición esta fuera de rango
-        Node* temp = head;
-        int i = 0;
-        while(i != index){
-            temp = temp->next;
-            i++;
-        }
-        if(temp->prev && temp->next){
-            temp->prev->next = temp->next;
-            temp->next->prev = temp->prev;
-        }
-        delete temp;
-        count--;
     }
-
-    T operator[](int index){   
-        if(count < index || index < 0){ 
-            throw std::out_of_range("Fuera de rango");
-        } //no retorna si es que la posición esta fuera de rango
-        Node* temp = head;
-        int i = 0;
-        while(i != index){
-            temp = temp->next;
-            i++;
-        }
-        return temp->val;
-    }
-
-    bool empty(){
+    void remove() {
 
     }
 
-    int size(){
+    T operator[](int index) {
 
     }
 
-    void clear(){
+    int list_size() {
 
     }
 
-    void reverse(){
-        Node* temp = head;
-        Node* newHead = nullptr;
-        while(temp!=nullptr){
-            Node* ptrSave = temp->next;
-            temp->next = temp->prev;
-            temp->prev = ptrSave; //intercambia punteros next y prev por cada iteracion
-            
-            newHead = temp;
-            temp = temp->prev;
-        }
-        head = newHead;
+    void reverse() {
+
     }
 };
-
-
