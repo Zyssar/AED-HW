@@ -75,10 +75,36 @@ public:
     }
 
     T pop_front(){
+        if(size ==0){
+            throw out_of_range("La lista esta vacia")
+        }
+
+        Node* toDelete = sentinel ->next;
+
+        // Actualizamos los enlaces de los punteros
+
+        sentinel ->next = toDelete->next;
+        toDelete->next->prev = setinel;
+
+        delete toDelete;
+        size--;
 
     }
 
     T pop_back(){
+        if(size ==0){
+            throw out_of_range("La lista esta vacia")
+        }
+
+        Node* toDelete = sentinel ->next;
+
+        // Actualizamos los enlaces de los punteros
+
+        sentinel ->  prev = toDelete->next;
+        toDelete -> prev->next = sentinel;
+
+        delete toDelete;
+        size--;
 
     }
 
@@ -134,7 +160,7 @@ public:
     }
 
     int list_size() {
-
+        return size;
     }
 
     void reverse() {
